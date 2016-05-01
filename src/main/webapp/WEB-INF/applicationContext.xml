@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+    xmlns:context="http://www.springframework.org/schema/context">
+		
+ 
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler />
+	<context:component-scan base-package="info.spring.crud" /> <!-- Chcemy automatycznie obsługiwać wszystkie klasy z adnotacjami w tym 
+		pakiecie -->
+	<context:annotation-config /> <!-- To na przyszłość, pozwoli nam korzystać z adnotacji także w klasach, 
+		które byśmy skonfigurowali ręcznie. Mówi że aplikacja będzie używać adnotacji -->
+  
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/mojaBaza" />
+		<property name="username" value="admin" />
+		<property name="password" value="admin" />
+	</bean>
+
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="info.spring.crud.model"></property>
+		<property name="jpaVendorAdapter"> <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    
+
+</beans>
