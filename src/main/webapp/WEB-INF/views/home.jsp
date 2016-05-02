@@ -14,20 +14,14 @@
 
 
 <a href="addPerson">Dodaj osobę</a><br>
-<a href="addPerson">Zaktualizuj dane osoby</a><br>
-<a href="addPerson">Znajdź osobę</a><br>
-<a href="addPerson">Usuń osobę</a><br>
-${persona.name}
 
 
 <c:forEach items="${lista}" var="lis">
-${lis.ID}
 ${lis.name}
 ${lis.lastname}
-${lis.age}<br>
+${lis.age} <a href="editPerson/${lis.ID}">Edit</a>  <a href="delete/${lis.ID}">Delete</a><br/>
 </c:forEach>
 
-${persona.name}
 
 </body>
 </html>

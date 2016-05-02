@@ -25,8 +25,8 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	@Transactional
-	public void update(Person person, int id) {
-		persondao.update(person, id);
+	public void update(Person person) {
+		persondao.update(person);
 
 	}
 

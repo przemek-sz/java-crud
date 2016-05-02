@@ -10,7 +10,7 @@ import info.spring.crud.model.Person;
 public interface PersonDao {
 	
 	public void add(Person person);
-	public void update(Person person,int id);
+	public void update(Person person);
 	public Person findbyid(Person person,int id);
 	public List<Person> listPersons();  
 	public void remove(Person person,int id);

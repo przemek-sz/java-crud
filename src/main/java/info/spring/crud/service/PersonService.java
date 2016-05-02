@@ -9,7 +9,7 @@ import info.spring.crud.model.Person;
 public interface PersonService {
         
 	public void add(Person person);
-	public void update(Person person,int id);
+	public void update(Person person);
 	public Person findbyid(Person person,int id);
 	public List<Person> listPesons();
 	public void remove(Person person,int id);

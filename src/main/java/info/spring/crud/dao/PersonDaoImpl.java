@@ -23,10 +23,9 @@ public class PersonDaoImpl implements PersonDao {
 	}
 
 	@Override
-	public void update(Person person,int id) {
+	public void update(Person person) {
 		
-		
-		em.merge(findbyid(person, id));
+		em.merge(person);
 
 	}
 
